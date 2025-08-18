@@ -17,7 +17,7 @@ A comprehensive PyTorch implementation of a multi-task learning pipeline for sim
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/umafall-mtl-pipeline.git
+git clone https://github.com/Shinigami-eye/MTL_fall_detection.git
 cd umafall-mtl-pipeline
 
 # Install dependencies
