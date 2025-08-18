@@ -1,0 +1,75 @@
+# Training configuration
+training:
+  # Experiment tracking
+  experiment_name: "umafall_mtl_baseline"
+  seed: 42
+  deterministic: true
+  
+  # Data configuration
+  window_size: 128  # samples (2.56s @ 50Hz)
+  stride: 64  # 50% overlap
+  batch_size: 64
+  num_workers: 4
+  
+  # Split configuration
+  split_type: "kfold"  # "kfold" or "loso"
+  n_folds: 5
+  val_fold: 0  # Which fold to use for validation
+  
+  # Multi-task loss configuration
+  loss_type: "weighted"  # "weighted", "uncertainty", "gradnorm"
+  task_weights:
+    activity: 0.5
+    fall: 0.5
+  
+  # Uncertainty weighting config
+  uncertainty:
+    init_sigma: 1.0
+    learnable: true
+  
+  # GradNorm config
+  gradnorm:
+    alpha: 1.0
+    update_freq: 25
+  
+  # Fall loss configuration
+  fall_loss_type: "bce"  # "bce" or "focal"
+  focal_gamma: 2.0
+  use_class_weights: true
+  
+  # Balanced sampling
+  use_balanced_sampler: true
+  fall_ratio: 0.15  # Minimum ratio of fall samples per batch
+  
+  # Optimizer configuration
+  optimizer:
+    type: "adamw"
+    lr: 1e-3
+    weight_decay: 1e-4
+    betas: [0.9, 0.999]
+  
+  # Scheduler configuration
+  scheduler:
+    type: "cosine"
+    warmup_epochs: 5
+    min_lr: 1e-6
+  
+  # Training parameters
+  epochs: 100
+  gradient_clip: 1.0
+  use_amp: true
+  
+  # Checkpointing
+  checkpoint_dir: "checkpoints"
+  save_best: true
+  save_last: true
+  metric_for_best: "composite"  # Weighted sum of val metrics
+  metric_weights:
+    val_fall_prauc: 0.5
+    val_adl_macro_f1: 0.5
+  
+  # Logging
+  log_interval: 10
+  val_interval: 1
+  use_tensorboard: true
+  use_wandb: false

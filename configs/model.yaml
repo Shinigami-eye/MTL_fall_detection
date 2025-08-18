@@ -1,0 +1,51 @@
+# Model configuration
+model:
+  # Backbone selection: "cnn_bilstm", "tcn", "lite_transformer"
+  backbone: "cnn_bilstm"
+  
+  # Input configuration
+  input_channels: 6  # 3 acc + 3 gyro (or 7 with magnitude)
+  use_magnitude: false
+  
+  # Shared trunk configuration
+  trunk:
+    hidden_dim: 128
+    num_layers: 2
+    dropout: 0.3
+    norm_type: "batch"  # "batch" or "instance"
+  
+  # CNN-BiLSTM specific
+  cnn_bilstm:
+    cnn_channels: [32, 64, 128]
+    kernel_sizes: [7, 5, 3]
+    lstm_hidden: 128
+    lstm_layers: 2
+    bidirectional: true
+  
+  # TCN specific
+  tcn:
+    num_channels: [64, 128, 128, 256]
+    kernel_size: 7
+    dropout: 0.3
+    dilation_base: 2
+  
+  # Lite Transformer specific
+  lite_transformer:
+    d_model: 128
+    nhead: 8
+    num_layers: 4
+    dim_feedforward: 512
+    dropout: 0.3
+    use_positional_encoding: true
+    max_seq_length: 256
+  
+  # Task heads
+  activity_head:
+    num_classes: 13  # 12 ADL + 1 fall
+    hidden_dims: [128, 64]
+    dropout: 0.3
+  
+  fall_head:
+    hidden_dims: [128, 64]
+    dropout: 0.3
+    threshold: 0.5  # Default, will be optimized

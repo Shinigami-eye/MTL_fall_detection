@@ -1,0 +1,10 @@
+# MTL with GradNorm
+defaults:
+  - ../train
+
+training:
+  experiment_name: "mvs_mtl_gradnorm"
+  loss_type: "gradnorm"
+  gradnorm:
+    alpha: 1.0
+    update_freq: 25

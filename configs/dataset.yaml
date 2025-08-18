@@ -1,0 +1,47 @@
+# Dataset configuration for UMAFall
+dataset:
+  name: "UMAFall"
+  root_dir: "data/raw/UMAFall_Dataset"
+  processed_dir: "data/processed"
+  manifest_dir: "data/manifests"
+  stats_dir: "data/stats"
+  
+  # Expected sensor columns (will be validated)
+  sensor_columns:
+    accelerometer: ["ax", "ay", "az"]
+    gyroscope: ["gx", "gy", "gz"]
+    # Alternative naming patterns (for auto-detection)
+    alternatives:
+      accelerometer: ["acc_x", "acc_y", "acc_z", "a_x", "a_y", "a_z"]
+      gyroscope: ["gyro_x", "gyro_y", "gyro_z", "g_x", "g_y", "g_z"]
+  
+  # Sampling rate configuration
+  sampling_rate: 50  # Hz (default if not found in CSV)
+  validate_sampling_rate: true
+  
+  # Activity mappings
+  adl_activities:
+    - "Applauding"
+    - "Bending"
+    - "GoDownstairs"
+    - "GoUpstairs"
+    - "HandsUp"
+    - "Hopping"
+    - "Jogging"
+    - "LyingDown_OnABed"
+    - "MakingACall"
+    - "OpeningDoor"
+    - "Sitting_GettingUpOnAChair"
+    - "Walking"
+  
+  fall_activities:
+    - "backwardFall"
+    - "forwardFall"
+    - "lateralFall"
+  
+  # Subject configuration
+  num_subjects: 19
+  subject_pattern: "Subject_{:02d}"
+  
+  # File pattern for parsing
+  filename_pattern: "UMAFall_Subject_{subject_id}{type}_{activity}_{trial}_{timestamp}.csv"

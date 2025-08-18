@@ -1,0 +1,10 @@
+# MTL with equal weights (0.5/0.5)
+defaults:
+  - ../train
+
+training:
+  experiment_name: "mvs_mtl_shared_05_05"
+  loss_type: "weighted"
+  task_weights:
+    activity: 0.5
+    fall: 0.5

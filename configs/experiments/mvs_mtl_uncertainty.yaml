@@ -1,0 +1,10 @@
+# MTL with uncertainty weighting
+defaults:
+  - ../train
+
+training:
+  experiment_name: "mvs_mtl_uncertainty"
+  loss_type: "uncertainty"
+  uncertainty:
+    init_sigma: 1.0
+    learnable: true

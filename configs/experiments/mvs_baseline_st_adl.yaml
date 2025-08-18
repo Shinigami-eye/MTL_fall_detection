@@ -1,0 +1,11 @@
+# Single-task baseline: ADL recognition only
+defaults:
+  - ../train
+
+training:
+  experiment_name: "mvs_st_adl"
+  loss_type: "single_task"
+  single_task: "activity"
+  task_weights:
+    activity: 1.0
+    fall: 0.0

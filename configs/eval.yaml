@@ -1,0 +1,48 @@
+# Evaluation configuration
+evaluation:
+  # Model checkpoint
+  checkpoint_path: "checkpoints/best_model.pt"
+  
+  # Data configuration
+  batch_size: 128
+  num_workers: 4
+  
+  # Threshold optimization
+  optimize_threshold: true
+  threshold_metric: "f_beta"
+  beta: 2.0  # Favor recall over precision for fall detection
+  threshold_search_points: 100
+  
+  # Metrics to compute
+  compute_metrics:
+    fall:
+      - "precision"
+      - "recall"
+      - "f1"
+      - "pr_auc"
+      - "roc_auc"
+      - "alarm_per_hour"
+    adl:
+      - "accuracy"
+      - "macro_f1"
+      - "per_class_f1"
+      - "confusion_matrix"
+  
+  # Analysis configuration
+  compute_per_activity_fp: true
+  compute_subject_breakdown: true
+  bootstrap_ci: true
+  n_bootstrap: 1000
+  ci_level: 0.95
+  
+  # Error analysis
+  save_errors: true
+  top_k_errors: 100
+  
+  # Visualization
+  generate_plots: true
+  plot_formats: ["png", "pdf"]
+  
+  # Output
+  output_dir: "reports"
+  save_predictions: true

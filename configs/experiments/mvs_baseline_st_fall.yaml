@@ -1,0 +1,11 @@
+# Single-task baseline: Fall detection only
+defaults:
+  - ../train
+
+training:
+  experiment_name: "mvs_st_fall"
+  loss_type: "single_task"
+  single_task: "fall"
+  task_weights:
+    activity: 0.0
+    fall: 1.0
