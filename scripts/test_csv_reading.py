@@ -6,7 +6,7 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from data_ingest.filename_parser_fixed import FilenameParser
+from data_ingest.filename_parser import FilenameParser
 from data_ingest.csv_reader_fixed import UMAFallCSVReader
 
 
@@ -65,7 +65,8 @@ def test_csv_reading(sample_file_path: str):
 if __name__ == "__main__":
     # Test with a sample file path
     # You can modify this to point to your actual file
-    sample_file = "UMAFall_Subject_18_Fall_forwardFall_1_20160529_213758.csv"
+    sample_file = str(Path(__file__).parent.parent / "data" / "raw" / "UMAFall_Subject_02_Fall_forwardFall_4_2016-06-13_20-53-39.csv")
+
     
     if len(sys.argv) > 1:
         sample_file = sys.argv[1]
